@@ -36,4 +36,4 @@ A dealer csak akkor következik, ha előtte a játékos nem érte el a lapjaival
 
 A dealer húzása is egy ciklusban van, ahol addig kell húznia, amíg lapjainak értéke 17 alatti.
 
-Ezután feltételes utasításokkal eldől, hogy ki nyert. Itt összehasonlításra kerül a játékos és dealer lapjainak értékét.
+Ezután feltételes utasításokkal eldől, hogy ki nyert. Itt összehasonlításra kerül a játékos és dealer lapjainak értéke.
