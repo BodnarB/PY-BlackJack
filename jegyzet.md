@@ -1,5 +1,7 @@
 ## Black Jack jegyzet
 
+**(Az ászok értéke még nincs lekezelve, így alapértelmezetten 11 az értéke.)**
+
 Szükségünk van a francia kártya paklira, ami 52 lapból áll. (Jokerek nélkül.)
 
 A kártykáknak vannak színei (card_suits) és értékei (card_values). Ezeket egy tuple-be és egy dictionary-be töltöttem fel.
