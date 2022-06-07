@@ -28,23 +28,24 @@ while True:
         players_hand.insert(0, random.choice(list(deck_w_values.items())))
         cards_ingame.insert(0, players_hand[0])
         del_from_list()
+        print("A játékos", str(len(players_hand))+". lapja:",
+              players_hand[0][0], "Értéke:", players_hand[0][1])
 
     def in_dealers_hands():
         dealers_hand.insert(0, random.choice(list(deck_w_values.items())))
         cards_ingame.insert(0, dealers_hand[0])
         del_from_list()
+        if len(dealers_hand)!= 2:
+            print("A dealer", str(len(dealers_hand))+". lapja:", dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
 
     in_players_hands()
-    print("A játékos első lapja:",
-          players_hand[0][0], "Értéke:", players_hand[0][1])
 
     in_dealers_hands()
-    print("A dealer első lapja:",
-          dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
+    # print("A dealer első lapja:",
+    #       dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
 
     in_players_hands()
-    print("A játékos második lapja:",
-          players_hand[0][0], "Értéke:", players_hand[0][1])
+
     player_cards_sum = players_hand[0][1]+players_hand[1][1]
     print("Játékos kártyáinak össz értéke:", player_cards_sum)
 
@@ -57,8 +58,7 @@ while True:
         if hit.lower() == "i":
             in_players_hands()
             player_cards_sum += players_hand[0][1]
-            print("A játékos lapot kért!", players_hand[0][0], "Értéke:",
-                  players_hand[0][1], "Lapjainak össz értéke:", player_cards_sum)
+            print("Lapjainak össz értéke:", player_cards_sum)
         elif hit != "i":
             print("A játékos megállt! Lapjainak értéke:", player_cards_sum)
             decision = "n"
@@ -67,7 +67,7 @@ while True:
         while dealer_cards_sum < 17:
             in_dealers_hands()
             dealer_cards_sum += dealers_hand[0][1]
-            print("A dealer lapot húzott! Lapjainak értéke összesen: ",
+            print("Lapjainak értéke összesen: ",
                   dealer_cards_sum)
 
     if (dealer_cards_sum <= 21) and (dealer_cards_sum > player_cards_sum):
