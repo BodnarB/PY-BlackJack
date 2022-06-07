@@ -35,14 +35,13 @@ while True:
         dealers_hand.insert(0, random.choice(list(deck_w_values.items())))
         cards_ingame.insert(0, dealers_hand[0])
         del_from_list()
-        if len(dealers_hand)!= 2:
-            print("A dealer", str(len(dealers_hand))+". lapja:", dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
+        if len(dealers_hand) != 2:
+            print("A dealer", str(len(dealers_hand))+". lapja:",
+                  dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
 
     in_players_hands()
 
     in_dealers_hands()
-    # print("A dealer első lapja:",
-    #       dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
 
     in_players_hands()
 
