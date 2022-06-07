@@ -49,7 +49,7 @@ while True:
     decision = "x"
     while decision == "x" and player_cards_sum < 21:
         hit = input("Kérsz még lapot? i/n ")
-        if hit == "i":
+        if hit.lower() == "i":
             player_plus_card = random.choice(list(deck_w_values.items()))
             cards_ingame.insert(0, player_plus_card)
             del_from_list()
