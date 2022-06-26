@@ -13,18 +13,20 @@ def del_from_list():
 
 
 def in_players_hands():
-    in_handANDcards_in(players_hand)
+    in_handANDcards_in(players_hand, player_cards_sum)
     del_from_list()
     print("A játékos", str(len(players_hand))+". lapja:",
           players_hand[0][0], "Értéke:", players_hand[0][1])
+    sumP()
 
 
 def in_dealers_hands():
-    in_handANDcards_in(dealers_hand)
+    in_handANDcards_in(dealers_hand, dealer_cards_sum)
     del_from_list()
     if len(dealers_hand) != 2:
         print("A dealer", str(len(dealers_hand))+". lapja:",
               dealers_hand[0][0], "Értéke:", dealers_hand[0][1])
+    sumD()
 
 
 def create_deck():
@@ -34,13 +36,22 @@ def create_deck():
             deck.append(suits+cardkey)
 
 
-def in_handANDcards_in(whoshand):
-    whoshand.insert(0, random.choice(list(deck_w_values.items())))
-    cards_ingame.insert(0, whoshand[0])
+def in_handANDcards_in(whoshand, holding):
+    newcard = random.choice(list(deck_w_values.items()))
+    if len(whoshand) > 0 and (newcard[1] == 11 and holding > 10):
+        newcard = newcard[0], 1
+    whoshand.insert(0, newcard)
+    cards_ingame.insert(0, newcard)
 
 
-def cards_sum(pORd):
-    return pORd[0][1]+pORd[1][1]
+def sumP():
+    global player_cards_sum
+    player_cards_sum += players_hand[0][1]
+
+
+def sumD():
+    global dealer_cards_sum
+    dealer_cards_sum += dealers_hand[0][1]
 
 
 while True:
@@ -49,29 +60,23 @@ while True:
     cards_ingame = []
     players_hand = []
     dealers_hand = []
+    player_cards_sum = 0
+    dealer_cards_sum = 0
 
     create_deck()
-
     deck_w_values = {deck[i]: deck_values[i] for i in range(len(deck))}
-
     in_players_hands()
-
     in_dealers_hands()
-
     in_players_hands()
-
-    player_cards_sum = cards_sum(players_hand)
     print("Játékos kártyáinak össz értéke:", player_cards_sum)
-
     in_dealers_hands()
-    dealer_cards_sum = cards_sum(dealers_hand)
 
     decision = "x"
     while decision == "x" and player_cards_sum < 21:
         hit = input("Kérsz még lapot? i/n ")
         if hit.lower() == "i":
             in_players_hands()
-            player_cards_sum += players_hand[0][1]
+
             print("Lapjainak össz értéke:", player_cards_sum)
         elif hit != "i":
             print("A játékos megállt! Lapjainak értéke:", player_cards_sum)
@@ -80,7 +85,6 @@ while True:
     if player_cards_sum < 21:
         while dealer_cards_sum < 17:
             in_dealers_hands()
-            dealer_cards_sum += dealers_hand[0][1]
             print("Lapjainak értéke összesen: ",
                   dealer_cards_sum)
 
