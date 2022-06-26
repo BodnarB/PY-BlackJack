@@ -1,6 +1,6 @@
 ## Black Jack jegyzet
 
-**(Az ászok értéke még nincs lekezelve, így alapértelmezetten 11 az értéke.)**
+**~~Az ászok értéke még nincs lekezelve, így alapértelmezetten 11 az értéke.~~ /Az ászok értéke lekezelve./ **
 
 Szükségünk van a francia kártya paklira, ami 52 lapból áll. (Jokerek nélkül.)
 
