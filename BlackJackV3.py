@@ -76,7 +76,6 @@ while True:
         hit = input("Kérsz még lapot? i/n ")
         if hit.lower() == "i":
             in_players_hands()
-
             print("Lapjainak össz értéke:", player_cards_sum)
         elif hit != "i":
             print("A játékos megállt! Lapjainak értéke:", player_cards_sum)
