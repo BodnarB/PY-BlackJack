@@ -1,6 +1,6 @@
 import random
 
-card_suits = ("Hearts ", "Diamonds ", "Spades ", "Clubs ")
+card_suits = ("Hearts", "Diamonds", "Spades", "Clubs")
 card_values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7,
                "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
 
@@ -17,7 +17,7 @@ def create_deck(card_suits, card_values):
     for suits in card_suits:
         for cardkey, cardvalue in card_values.items():
             deck_values.append(cardvalue)
-            deck.append(suits+cardkey)
+            deck.append(suits+" "+cardkey)
     return (deck_values, deck)
 
 
@@ -92,16 +92,18 @@ if valueOfCards(players_hand) < 21:
         print("Lapjainak értéke összesen: ",
               valueOfCards(dealers_hand))
 
-if (valueOfCards(dealers_hand) <= 21) and (valueOfCards(dealers_hand) > valueOfCards(players_hand)):
-    print("A dealer nyert! Lapjainak értéke összesen: ",
-          valueOfCards(dealers_hand))
-elif (valueOfCards(players_hand) <= 21) and (valueOfCards(players_hand) > valueOfCards(dealers_hand)):
-    print("A játékos nyert! Lapjainak értéke összesen:", (valueOfCards(players_hand)), "A dealer lapjainak össz értéke:",
-          valueOfCards(dealers_hand))
-elif (valueOfCards(players_hand) <= 21) and (valueOfCards(players_hand) == valueOfCards(dealers_hand)):
-    print("Döntetlen!")
-elif (valueOfCards(dealers_hand) > 21) and (valueOfCards(players_hand) <= 21):
-    print("A dealer lapjainak értéke több, mint 21! A játékos nyert!")
-elif (valueOfCards(players_hand) > 21) and (valueOfCards(dealers_hand) <= 21):
-    print("A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke:",
-          valueOfCards(dealers_hand))
+
+def res(PlayerTotal, DealerTotal):
+    if DealerTotal <= 21 and DealerTotal > PlayerTotal:
+        return "A dealer nyert! Lapjainak értéke összesen: ", DealerTotal
+    elif PlayerTotal <= 21 and PlayerTotal > DealerTotal:
+        return "A játékos nyert! Lapjainak értéke összesen: ", PlayerTotal, "A dealer lapjai összesen: ", DealerTotal
+    elif PlayerTotal <= 21 and PlayerTotal == DealerTotal:
+        return "Döntetlen!"
+    elif DealerTotal > 21 and PlayerTotal <= 21:
+        return "A dealer lapjainak értéke több, mint 21! A játékos nyert!"
+    elif PlayerTotal > 21 and DealerTotal <= 21:
+        return "A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke: ", DealerTotal
+
+
+print(*res(valueOfCards(players_hand), valueOfCards(dealers_hand)))
