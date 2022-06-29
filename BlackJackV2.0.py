@@ -5,9 +5,9 @@ card_values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7,
                "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
 
 
-cards_ingame = []   # The cards in the game. We use this list to delete these cards from the main deck, so we can't use a card twice.
-players_hand = []   # The cards in the player's hand.
-dealers_hand = []   # The cards in the dealer's hand.
+cards_ingame = []   #   We use this list to delete these cards from the main deck, so we can't use a card twice.
+players_hand = []   #   The cards in the player's hand.
+dealers_hand = []   #   The cards in the dealer's hand.
 
 
 def create_deck(card_suits, card_values):
@@ -48,7 +48,7 @@ def whatIsTheNewcard(whoshand):
     return theNewcard
 
 
-def move_by(who):
+def draw_by(who):
     newcard(who)
     if who == players_hand:
         print("A játékos", *whatIsTheNewcard(players_hand))
@@ -65,18 +65,18 @@ def valueOfCards(whoseCards):
     return(sum(totalValue))
 
 
-move_by(players_hand)
-move_by(dealers_hand)
-move_by(players_hand)
+draw_by(players_hand)
+draw_by(dealers_hand)
+draw_by(players_hand)
 print("Játékos kártyáinak össz értéke:", valueOfCards(players_hand))
-move_by(dealers_hand)
+draw_by(dealers_hand)
 
 
 decision = "y"
 while decision == "y" and valueOfCards(players_hand) < 21:
     hit = input("Kérsz még lapot? i/n ")
     if hit.lower() == "i":
-        move_by(players_hand)
+        draw_by(players_hand)
         print("Lapjainak össz értéke:", valueOfCards(players_hand))
     elif hit != "i":
         print("A játékos megállt! Lapjainak értéke:", valueOfCards(players_hand))
@@ -85,7 +85,7 @@ while decision == "y" and valueOfCards(players_hand) < 21:
 
 if valueOfCards(players_hand) < 21:
     while valueOfCards(dealers_hand) < 17:
-        move_by(dealers_hand)
+        draw_by(dealers_hand)
         print("Lapjainak értéke összesen: ",
               valueOfCards(dealers_hand))
 
