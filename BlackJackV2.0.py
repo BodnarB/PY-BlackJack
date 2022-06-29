@@ -5,9 +5,10 @@ card_values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7,
                "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
 
 
-cards_ingame = []   #   We use this list to delete these cards from the main deck, so we can't use a card twice.
-players_hand = []   #   The cards in the player's hand.
-dealers_hand = []   #   The cards in the dealer's hand.
+# We use this list to delete these cards from the main deck, so we can't use a card twice.
+cards_ingame = []
+players_hand = []  # The cards in the player's hand.
+dealers_hand = []  # The cards in the dealer's hand.
 
 
 def create_deck(card_suits, card_values):
@@ -38,8 +39,9 @@ def del_from_maindeck():
 def newcard(whoshand):
     newcard = random_card()
     cards_ingame.insert(0, newcard)
-    whoshand.insert(0, newcard)
     del_from_maindeck()
+    whoshand.insert(0, newcard)
+    valueOfAce(whoshand)
 
 
 def whatIsTheNewcard(whoshand):
@@ -63,6 +65,13 @@ def valueOfCards(whoseCards):
         valueOfcard = (whoseCards[i][1])
         totalValue.append(valueOfcard)
     return(sum(totalValue))
+
+
+def valueOfAce(whosecards):
+    for i in range(len(whosecards)):
+        if "Ace" in whosecards[i][0]:
+            if valueOfCards(whosecards) > 21:
+                whosecards[i] = whosecards[i][0], 1
 
 
 draw_by(players_hand)
