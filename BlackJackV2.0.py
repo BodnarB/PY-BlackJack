@@ -5,8 +5,7 @@ card_values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7,
                "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
 
 
-# The cards in the game. We use this list to delete these cards from the main deck, so we can't use a card twice.
-cards_ingame = []
+cards_ingame = []   # The cards in the game. We use this list to delete these cards from the main deck, so we can't use a card twice.
 players_hand = []   # The cards in the player's hand.
 dealers_hand = []   # The cards in the dealer's hand.
 
@@ -49,15 +48,13 @@ def whatIsTheNewcard(whoshand):
     return theNewcard
 
 
-def players_move():
-    newcard(players_hand)
-    print("A játékos", *whatIsTheNewcard(players_hand))
-
-
-def dealers_move():
-    newcard(dealers_hand)
-    if len(dealers_hand) != 2:
-        print("A dealer", *whatIsTheNewcard(dealers_hand))
+def move_by(who):
+    newcard(who)
+    if who == players_hand:
+        print("A játékos", *whatIsTheNewcard(players_hand))
+    elif who == dealers_hand:
+        if len(dealers_hand) != 2:
+            print("A dealer", *whatIsTheNewcard(dealers_hand))
 
 
 def valueOfCards(whoseCards):
@@ -68,18 +65,18 @@ def valueOfCards(whoseCards):
     return(sum(totalValue))
 
 
-players_move()
-dealers_move()
-players_move()
+move_by(players_hand)
+move_by(dealers_hand)
+move_by(players_hand)
 print("Játékos kártyáinak össz értéke:", valueOfCards(players_hand))
-dealers_move()
+move_by(dealers_hand)
 
 
 decision = "y"
 while decision == "y" and valueOfCards(players_hand) < 21:
     hit = input("Kérsz még lapot? i/n ")
     if hit.lower() == "i":
-        players_move()
+        move_by(players_hand)
         print("Lapjainak össz értéke:", valueOfCards(players_hand))
     elif hit != "i":
         print("A játékos megállt! Lapjainak értéke:", valueOfCards(players_hand))
@@ -88,7 +85,7 @@ while decision == "y" and valueOfCards(players_hand) < 21:
 
 if valueOfCards(players_hand) < 21:
     while valueOfCards(dealers_hand) < 17:
-        dealers_move()
+        move_by(dealers_hand)
         print("Lapjainak értéke összesen: ",
               valueOfCards(dealers_hand))
 
