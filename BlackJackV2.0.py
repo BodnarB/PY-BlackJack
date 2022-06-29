@@ -54,7 +54,6 @@ def whatIsTheNewcard(whoshand):
     return theNewcard
 
 
-
 def draw_by(who):
     newcard(who)
     if who == players_hand:
@@ -64,6 +63,7 @@ def draw_by(who):
             print("A dealer", *whatIsTheNewcard(dealers_hand))
 
 
+# The total value of the cards held in the player's hand or dealer's hand.
 def valueOfCards(whoseCards):
     totalValue = []
     for i in range(len(whoseCards)):
