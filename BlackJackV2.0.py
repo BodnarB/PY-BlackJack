@@ -95,15 +95,15 @@ if valueOfCards(players_hand) < 21:
 
 def res(PlayerTotal, DealerTotal):
     if DealerTotal <= 21 and DealerTotal > PlayerTotal:
-        return "A dealer nyert! Lapjainak értéke összesen: ", DealerTotal
+        return "A dealer nyert! Lapjainak értéke összesen: " + str(DealerTotal)
     elif PlayerTotal <= 21 and PlayerTotal > DealerTotal:
-        return "A játékos nyert! Lapjainak értéke összesen: ", PlayerTotal, "A dealer lapjai összesen: ", DealerTotal
+        return "A játékos nyert! Lapjainak értéke összesen: " + str(PlayerTotal) + " A dealer lapjai összesen: " + str(DealerTotal)
     elif PlayerTotal <= 21 and PlayerTotal == DealerTotal:
         return "Döntetlen!"
     elif DealerTotal > 21 and PlayerTotal <= 21:
         return "A dealer lapjainak értéke több, mint 21! A játékos nyert!"
     elif PlayerTotal > 21 and DealerTotal <= 21:
-        return "A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke: ", DealerTotal
+        return "A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke: " + str(DealerTotal)
 
 
-print(*res(valueOfCards(players_hand), valueOfCards(dealers_hand)))
+print(res(valueOfCards(players_hand), valueOfCards(dealers_hand)))
