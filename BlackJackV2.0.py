@@ -90,7 +90,7 @@ if valueOfCards(players_hand) < 21:
               valueOfCards(dealers_hand))
 
 
-def res(PlayerTotal, DealerTotal):
+def result(PlayerTotal, DealerTotal):
     if DealerTotal <= 21 and DealerTotal > PlayerTotal:
         return "A dealer nyert! Lapjainak értéke összesen: " + str(DealerTotal)
     elif PlayerTotal <= 21 and PlayerTotal > DealerTotal:
@@ -103,4 +103,4 @@ def res(PlayerTotal, DealerTotal):
         return "A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke: " + str(DealerTotal)
 
 
-print(res(valueOfCards(players_hand), valueOfCards(dealers_hand)))
+print(result(valueOfCards(players_hand), valueOfCards(dealers_hand)))
