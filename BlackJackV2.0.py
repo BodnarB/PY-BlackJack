@@ -5,12 +5,13 @@ card_values = {"Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7,
                "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10, "Ace": 11}
 
 
-# We use this list to delete these cards from the main deck, so we can't use a card twice.
-cards_ingame = []
+cards_ingame = []  # We use this list to delete these cards from the main deck, so we can't use a card twice.
 players_hand = []  # The cards in the player's hand.
 dealers_hand = []  # The cards in the dealer's hand.
 
 
+#   Creating the cards with the written values (e.g., Hearts Two ) in deck list. Creating the values as int elements in deck_values list.
+#   Later we create a dict from these two lists. (deck_w_values)
 def create_deck(card_suits, card_values):
     deck_values = []
     deck = []
@@ -25,10 +26,12 @@ deck_w_values = {create_deck(card_suits, card_values)[1][i]:
                  create_deck(card_suits, card_values)[0][i] for i in range(len(create_deck(card_suits, card_values)[1]))}
 
 
+# Picking a random card from the main deck (deck_w_values).
 def random_card():
     return random.choice(list(deck_w_values.items()))
 
 
+# Deleting the picked card from the main deck. We use this in the newcard function.
 def del_from_maindeck():
     key = cards_ingame[0][0]
     val = cards_ingame[0][1]
@@ -37,17 +40,19 @@ def del_from_maindeck():
 
 
 def newcard(whoshand):
-    newcard = random_card()
+    newcard = random_card() 
     cards_ingame.insert(0, newcard)
     del_from_maindeck()
-    whoshand.insert(0, newcard)
-    valueOfAce(whoshand)
+    whoshand.insert(0, newcard) # Insert the randomly picked card to the players or dealer's hand.
+    valueOfAce(whoshand) # Checking if there is an Ace in his hand. If yes, we examine the values of the cards and giving to the ace the more preferred value. 
 
 
+# We will use this function to print the picked card with its value.
 def whatIsTheNewcard(whoshand):
     theNewcard = str(len(whoshand)) + \
         ". lapja:", whoshand[0][0], "Értéke:", whoshand[0][1]
     return theNewcard
+
 
 
 def draw_by(who):
