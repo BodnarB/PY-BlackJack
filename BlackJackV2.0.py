@@ -10,8 +10,7 @@ while True:
     players_hand = []  # The cards in the player's hand.
     dealers_hand = []  # The cards in the dealer's hand.
 
-
-    #   Creating the cards with the written values (e.g., Hearts Two ) in deck list. Creating the values as int elements in deck_values list.
+    #   Creating the cards with the written values (e.g., Hearts Two ) in "deck" list. Creating the values as int elements in "deck_values" list.
     #   Later we create a dict from these two lists. (deck_w_values)
     def create_deck(card_suits, card_values):
         deck_values = []
@@ -32,18 +31,23 @@ while True:
 
 
     # Deleting the picked card from the main deck. We use this in the newcard function.
-    def del_from_maindeck():
+    def del_from_maindeck(deck_w_values):
         key = cards_ingame[0][0]
         val = cards_ingame[0][1]
         if val in deck_w_values.values() and key in deck_w_values.keys():
             del deck_w_values[key]
+        return deck_w_values
+
 
     def newcard(whoshand):
         newcard = random_card()
         cards_ingame.insert(0, newcard)
-        del_from_maindeck()
-        whoshand.insert(0, newcard) # Insert the randomly picked card to the players or dealer's hand.
-        valueOfAce(whoshand) # Checking if there is an Ace in his hand. If yes, we examine the values of the cards and giving to the ace the more preferred value.
+        del_from_maindeck(deck_w_values)
+        # Insert the randomly picked card to the players or dealer's hand.
+        whoshand.insert(0, newcard)
+        # Checking if there is an Ace in his hand. If yes, we examine the values of the cards and giving to the ace the more preferred value.
+        valueOfAce(whoshand)
+        return newcard
 
 
     # We will use this function to print the picked card with its value.
@@ -51,6 +55,7 @@ while True:
         theNewcard = str(len(whoshand)) + \
             ". lapja:", whoshand[0][0], "Értéke:", whoshand[0][1]
         return theNewcard
+
 
     def draw_by(who):
         newcard(who)
@@ -69,10 +74,13 @@ while True:
             totalValue.append(valueOfcard)
         return(sum(totalValue))
 
+
     def valueOfAce(whosecards):
         for i in range(len(whosecards)):
             if "Ace" in whosecards[i][0] and valueOfCards(whosecards) > 21:
                 whosecards[i] = whosecards[i][0], 1
+                return whosecards[i]
+
 
     draw_by(players_hand)
     draw_by(dealers_hand)
