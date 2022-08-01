@@ -46,12 +46,12 @@ while True:
         # Insert the randomly picked card to the players or dealer's hand.
         whoshand.insert(0, newcard)
         # Checking if there is an Ace in his hand. If yes, we examine the values of the cards and giving to the ace the more preferred value.
-        valueOfAce(whoshand)
+        value_of_ace(whoshand)
         return newcard
 
 
     # We will use this function to print the picked card with its value.
-    def whatIsTheNewcard(whoshand):
+    def what_is_the_newcard(whoshand):
         theNewcard = str(len(whoshand)) + \
             ". lapja:", whoshand[0][0], "Értéke:", whoshand[0][1]
         return theNewcard
@@ -60,14 +60,14 @@ while True:
     def draw_by(who):
         newcard(who)
         if who == players_hand:
-            print("A játékos", *whatIsTheNewcard(players_hand))
+            print("A játékos", *what_is_the_newcard(players_hand))
         elif who == dealers_hand:
             if len(dealers_hand) != 2:
-                print("A dealer", *whatIsTheNewcard(dealers_hand))
+                print("A dealer", *what_is_the_newcard(dealers_hand))
 
 
     # The total value of the cards held in the player's hand or dealer's hand.
-    def valueOfCards(whoseCards):
+    def value_of_cards(whoseCards):
         totalValue = []
         for i in range(len(whoseCards)):
             valueOfcard = (whoseCards[i][1])
@@ -75,9 +75,9 @@ while True:
         return(sum(totalValue))
 
 
-    def valueOfAce(whosecards):
+    def value_of_ace(whosecards):
         for i in range(len(whosecards)):
-            if "Ace" in whosecards[i][0] and valueOfCards(whosecards) > 21:
+            if "Ace" in whosecards[i][0] and value_of_cards(whosecards) > 21:
                 whosecards[i] = whosecards[i][0], 1
                 return whosecards[i]
 
@@ -85,25 +85,25 @@ while True:
     draw_by(players_hand)
     draw_by(dealers_hand)
     draw_by(players_hand)
-    print("Játékos kártyáinak össz értéke:", valueOfCards(players_hand))
+    print("Játékos kártyáinak össz értéke:", value_of_cards(players_hand))
     draw_by(dealers_hand)
 
     decision = "y"
-    while decision == "y" and valueOfCards(players_hand) < 21:
+    while decision == "y" and value_of_cards(players_hand) < 21:
         hit = input("Kérsz még lapot? i/n ")
         if hit.lower() == "i":
             draw_by(players_hand)
-            print("Lapjainak össz értéke:", valueOfCards(players_hand))
+            print("Lapjainak össz értéke:", value_of_cards(players_hand))
         elif hit != "i":
             print("A játékos megállt! Lapjainak értéke:",
-                  valueOfCards(players_hand))
+                  value_of_cards(players_hand))
             decision = "n"
 
-    if valueOfCards(players_hand) < 21:
-        while valueOfCards(dealers_hand) < 17:
+    if value_of_cards(players_hand) < 21:
+        while value_of_cards(dealers_hand) < 17:
             draw_by(dealers_hand)
             print("Lapjainak értéke összesen: ",
-                  valueOfCards(dealers_hand))
+                  value_of_cards(dealers_hand))
 
     def result(PlayerTotal, DealerTotal):
         if DealerTotal <= 21 and DealerTotal > PlayerTotal:
@@ -117,7 +117,6 @@ while True:
         elif PlayerTotal > 21 and DealerTotal <= 21:
             return "A játékos lapjainak értéke több, mint 21! A dealer nyert! A dealer lapjainak össz értéke: " + str(DealerTotal)
 
-    print(result(valueOfCards(players_hand), valueOfCards(dealers_hand)))
-
+    print(result(value_of_cards(players_hand), value_of_cards(dealers_hand)))
     print("Jöjjön még egy kör! Nyomj meg egy gombot...")
     input()
